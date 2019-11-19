@@ -15,8 +15,8 @@ public class MultipartFileUtil {
     /**
      * 文件在服务器中存储的目录
      */
-//    public static String uploadFilePath = "D:\\E\\ideaProject\\project-common\\src\\main\\resources\\static";
-    public static String uploadFilePath = "/root/uploadFile/project-common";
+    public static String uploadFilePath = "D:\\E\\ideaProject\\project-common\\src\\main\\resources\\static";
+//    public static String uploadFilePath = "/root/uploadFile/project-common";
 
 
 

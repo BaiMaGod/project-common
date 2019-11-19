@@ -45,3 +45,5 @@ pagehelper:
   #不启用supportMethodsArguments参数，则需使用PageHelper.startPage(pageNum,pageSize)方法调用
   support-methods-arguments: true
   params: count=countSql
+
+uploadFilePath: D:\E\ideaProject\project-common\src\main\resources\static\
