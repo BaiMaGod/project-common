@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <title>网站制作助手-白马46</title>
+    <link rel="icon" type="image/png" href="http://148.70.0.26:8080/ApeHouse/statics/images/ape-icon.png"/>
+
+    <link rel="stylesheet" href="/frame/layui/css/layui.css"  media="all">
+    <script src="/frame/layui/layui.js" charset="utf-8"></script>
+</head>
+<body>
+    <h1 th:text="| hello ${name}|"></h1>
+
+    <form class="layui-form" action="/json/file/add" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户id</label>
+            <div class="layui-input-block">
+                <input type="text" name="userId" required  lay-verify="required" placeholder="请输入用户id" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-inline">
+                <input type="text" name="type" required lay-verify="required" placeholder="请输入类型" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">文件1</label>
+            <div class="layui-input-inline">
+                <input type="file" name="multipartFiles" required lay-verify="required" placeholder="请上传文件1" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">文件2</label>
+            <div class="layui-input-inline">
+                <input type="file" name="multipartFiles" placeholder="请上传文件2" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        //Demo
+        layui.use('form', function(){
+            var form = layui.form
+                ,$ = layui.jquery;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+
+                var formData = new FormData();
+                formData.append("userId", data.field.userId);
+                formData.append("type", data.field.type);
+
+                // 文件
+                var multipartFiles = $("[name='multipartFiles']");
+                for (var i = 0; i < multipartFiles.length; i++) {
+                    formData.append("multipartFiles", multipartFiles[i].files[0]);
+                }
+
+                // console.log(formData);
+                submitFileAdd(formData);
+
+                return false;
+            });
+
+            function submitFileAdd(formData) {
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://localhost:12345/json/file/add",
+                    "method": "POST",
+                    "processData": false,   //不需要对数据做任何预处理
+                    "contentType": false,   //不设置数据格式
+                    "mimeType": "multipart/form-data",
+                    "data": formData
+                }
+
+                $.ajax(settings).done(function (response) {
+                    response = JSON.parse(response);
+                    console.log(response);
+                    if(response.code == 0){
+                        layer.msg(" 提交成功 ");
+                    }else {
+                        layer.msg("1"+JSON.stringify(response.msg));
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

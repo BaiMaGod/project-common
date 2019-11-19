@@ -1,0 +1,73 @@
+<!-- 功能全局配置信息 -->
+<config>
+    <!-- 功能基础信息 -->
+    <info>
+    	<name>file</name>
+    	<nameHan>文件资源</nameHan>
+    	<description>提供文件等资源的上传、下载、列表查询功能</description>
+    	<tag>基础功能</tag>
+
+    	<lowPrice>30</lowPrice>
+        <highPrice>170</highPrice>
+        
+    	<lowHour>3</lowHour>
+        <highHour>17</highHour>
+
+    	<author>yc</author>
+        <onlineTime>2019-11-14</onlineTime>
+    </info>
+
+    <!-- 功能实现方式 -->
+    <methods>
+        <method>
+            <name>list</name>
+            <nameHan>查询文件列表</nameHan>
+            <description>查询满足条件的文件列表，分页查询</description>
+            <tag>中级实现</tag>
+
+            <lowPrice>40</lowPrice>
+            <lowHour>4</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-11-14</onlineTime>
+        </method>
+        <method>            
+            <name>add</name>
+            <nameHan>新增文件</nameHan>
+            <description>新增文件，即上传文件操作</description>
+            <tag>高级实现</tag>
+
+            <lowPrice>60</lowPrice>
+            <lowHour>6</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-11-14</onlineTime>
+        </method>
+        <method>
+            <name>download</name>
+            <nameHan>文件下载</nameHan>
+            <description>微信授权登录</description>
+            <tag>高级实现</tag>
+
+            <lowPrice>40</lowPrice>
+            <lowHour>4</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-11-14</onlineTime>
+        </method>
+
+        <method>
+            <name>delete</name>
+            <nameHan>删除文件</nameHan>
+            <description>删除文件，可批量删除</description>
+            <tag>中级实现</tag>
+
+            <lowPrice>30</lowPrice>
+            <lowHour>3</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-11-14</onlineTime>
+        </method>
+    </methods>
+
+</config>

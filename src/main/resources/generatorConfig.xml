@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--数据库驱动-->
+    <classPathEntry    location="D:\E\ideaProject\project-common\src\main\generator\mysql-connector-java-8.0.12.jar"/>
+
+
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/base_common?useSSL=false"
+                        userId="root" password="qwertyuiop123.">
+
+            <!--MySQL 8.x 需要指定服务器的时区-->
+            <property name="serverTimezone" value="UTC"/>
+
+            <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
+            <!--参考 : http://www.mybatis.org/generator/usage/mysql.html-->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.model.common" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成映射xml文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mapper.common" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成对应表及类名-->
+        <table tableName="category" domainObjectName="Category"
+               enableCountByExample="true"  enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->
+            <property name="useActualColumnNames" value="true"/>
+
+
+        </table>
+
+        <!--生成对应表及类名-->
+        <table tableName="file" domainObjectName="File"
+               enableCountByExample="true"  enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->
+            <property name="useActualColumnNames" value="true"/>
+
+
+        </table>
+
+    </context>
+</generatorConfiguration>

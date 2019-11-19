@@ -1,0 +1,37 @@
+<!-- 模块全局配置信息 -->
+<config>
+    <!-- 模块基础信息 -->
+    <info>
+        <name>common</name>
+        <nameHan>常用功能</nameHan>
+        <description>各种常用功能，作为其他功能的基础支持</description>
+        <tag>基础功能</tag>
+
+        <lowPrice>10</lowPrice>
+        <highPrice>200</highPrice>
+
+        <lowHour>1</lowHour>
+        <highHour>20</highHour>
+
+        <author>yc</author>
+        <onlineTime>2019-10-29</onlineTime>
+    </info>
+
+    <!-- 子功能 -->
+    <molds>
+        <mold>category</mold>
+        <mold>file</mold>
+    </molds>
+
+    <sql>
+        <base>
+
+        </base>
+        <login>
+
+        </login>
+        <register>
+
+        </register>
+    </sql>
+</config>

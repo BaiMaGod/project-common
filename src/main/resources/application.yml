@@ -1,0 +1,47 @@
+server:
+  port: 12345
+
+spring:
+  #  devtools: #热部署配置
+  #    restart:
+  #      enabled: true  #设置开启热部署
+  #      additional-paths: src/main/java  #重启目录
+
+  datasource:
+    url: jdbc:mysql://120.24.186.190:3306/base_common?serverTimezone=Hongkong&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: abcABC123...
+
+  #thymeleaf 配置
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+    #缓存设置为false, 这样修改之后马上生效，便于调试
+    cache: false
+
+  servlet:
+    multipart:
+      # 单个文件的最大值
+      max-file-size: 100MB
+      # 上传文件总的最大值
+      max-request-size: 1000MB
+
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+pagehelper:
+  #下面两行正常写法
+  helper-dialect: mysql
+  reasonable: true
+  #如果启用supportMethodsArguments参数，则pageHelper可以自动拦截请求参数中的pageNum,pageSize参数
+  #不启用supportMethodsArguments参数，则需使用PageHelper.startPage(pageNum,pageSize)方法调用
+  support-methods-arguments: true
+  params: count=countSql

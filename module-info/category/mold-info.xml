@@ -1,0 +1,88 @@
+<!-- 功能全局配置信息 -->
+<config>
+    <!-- 功能基础信息 -->
+    <info>
+    	<name>category</name>
+    	<nameHan>分类</nameHan>
+    	<description>各种分类支持功能，包括学历分类，菜单分类等</description>
+    	<tag>基础功能</tag>
+
+        <lowPrice>20</lowPrice>
+        <!-- 功能选择总价大于highPrice，取highPrice -->
+        <highPrice>100</highPrice>
+        
+        <lowHour>2</lowHour>
+        <highHour>10</highHour>
+
+        <author>yc</author>
+		<onlineTime>2019-11-14</onlineTime>
+    </info>
+
+    <!-- 功能实现方式 -->
+    <methods>
+        <method>
+        	<name>list</name>
+	    	<nameHan>查询分类列表</nameHan>
+	    	<description>查询满足条件的分类项列表，分页查询</description>
+	    	<tag>基础实现</tag>
+
+	        <lowPrice>40</lowPrice>
+	        <lowHour>4</lowHour>
+
+	        <author>yc</author>
+			<onlineTime>2019-11-14</onlineTime>
+        </method>
+
+		<method>
+			<name>add</name>
+			<nameHan>新增分类项</nameHan>
+			<description>新增分类项</description>
+			<tag>基础实现</tag>
+
+			<lowPrice>20</lowPrice>
+			<lowHour>2</lowHour>
+
+			<author>yc</author>
+			<onlineTime>2019-11-14</onlineTime>
+		</method>
+		<method>
+			<name>update</name>
+			<nameHan>修改分类项</nameHan>
+			<description>修改分类项</description>
+			<tag>基础实现</tag>
+
+			<lowPrice>20</lowPrice>
+			<lowHour>2</lowHour>
+
+			<author>yc</author>
+			<onlineTime>2019-11-14</onlineTime>
+		</method>
+
+        <method>
+        	<name>delete</name>
+	    	<nameHan>删除分类项</nameHan>
+	    	<description>删除分类项，可批量删除</description>
+	    	<tag>基础实现</tag>
+
+			<lowPrice>20</lowPrice>
+			<lowHour>2</lowHour>
+
+			<author>yc</author>
+			<onlineTime>2019-11-14</onlineTime>
+        </method>
+  <!--      <method>
+        	<name>weiXin</name>
+	    	<nameHan>微信注册</nameHan>
+	    	<description>微信授权注册</description>
+	    	<tag>高级实现</tag>
+
+	        <lowPrice>40</lowPrice>
+	        <lowHour>4</lowHour>
+
+	        <author>yc</author>
+	        <onlineTime>2019-10-29</onlineTime>
+
+        </method>-->
+    </methods>
+
+</config>
