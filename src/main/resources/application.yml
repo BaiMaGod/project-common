@@ -46,4 +46,9 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-uploadFilePath: D:\E\ideaProject\project-common\src\main\resources\static\
+# 配置文件上传的存储路径，以及图片预览前置路径
+uploadFile:
+  path: D:\E\ideaProject\project-common\src\main\resources\static\
+  beforeUrl: http://localhost:12345/
+#  path: /root/uploadFile/project-common/
+#  beforeUrl: http://localhost:80/project-common/

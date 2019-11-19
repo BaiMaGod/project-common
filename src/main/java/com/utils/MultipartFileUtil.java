@@ -12,6 +12,7 @@ import java.net.URLEncoder;
  * 文件上传工具类
  */
 public class MultipartFileUtil {
+
     /**
      * 文件在服务器中存储的目录
      */
