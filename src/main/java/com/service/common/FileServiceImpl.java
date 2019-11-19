@@ -1,5 +1,6 @@
 package com.service.common;
 
+import com.config.ServerConfig;
 import com.form.common.FileForm;
 import com.github.pagehelper.PageHelper;
 import com.mapper.common.FileMapper;
@@ -12,7 +13,6 @@ import com.utils.CommonUtil;
 import com.utils.ConvertUtil;
 import com.utils.MultipartFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -28,8 +28,9 @@ import java.util.List;
 public class FileServiceImpl implements FileService{
     @Autowired
     FileMapper fileMapper;
-    @Value("${uploadFile.beforeUrl}")
-    String beforeUrl;
+    @Autowired
+    ServerConfig serverConfig;
+
 
     @Override
     public Result list(FileForm.listForm form) {
@@ -61,7 +62,7 @@ public class FileServiceImpl implements FileService{
         page.setTotalRows(count);
 
         for (File file : files) {
-            file.setFileUrl(beforeUrl + file.getFileUrl());
+            file.setFileUrl(serverConfig.getUploadFileUrl() + file.getFileUrl());
         }
 
         return Result.success(files,page).setCount(count);

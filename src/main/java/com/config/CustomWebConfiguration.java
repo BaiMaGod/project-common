@@ -1,5 +1,6 @@
 package com.config;
 
+import com.utils.MultipartFileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,6 +10,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CustomWebConfiguration implements WebMvcConfigurer {
     @Value("${uploadFile.path}")
     private String filePath;
+
+    @Value("${uploadFile.path}")
+    public void setUploadFilePath(String uploadFilePath) {
+        MultipartFileUtil.uploadFilePath = uploadFilePath;
+    }
  
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

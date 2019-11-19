@@ -1,0 +1,21 @@
+server:
+  port: 12345
+
+spring:
+  datasource:
+    url: jdbc:mysql://120.24.186.190:3306/base_common?serverTimezone=Hongkong&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: abcABC123...
+
+
+
+uploadFile:
+  # 配置文件上传的存储路径
+  path: D:\E\ideaProject\project-common\src\main\resources\static\
+  # 上传的文件的访问ip，为空则默认项目运行环境的ip
+  port:
+  # 上传的文件的访问端口，为空则默认项目运行环境的端口
+  ip:
+  # 上传的文件的访问前置url
+  beforeUrl: /

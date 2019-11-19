@@ -1,0 +1,25 @@
+server:
+  port: 12345
+
+spring:
+  #  devtools: #热部署配置
+  #    restart:
+  #      enabled: true  #设置开启热部署
+  #      additional-paths: src/main/java  #重启目录
+
+  datasource:
+    url: jdbc:mysql://120.24.186.190:3306/base_common?serverTimezone=Hongkong&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: abcABC123...
+
+
+uploadFile:
+  # 配置文件上传的存储路径
+  path: /root/uploadFile/project-common/
+  # 上传的文件的访问ip，为空则默认项目运行环境的ip
+  port: 80
+  # 上传的文件的访问端口，为空则默认项目运行环境的端口
+  ip: 120.24.186.190
+  # 上传的文件的访问前置url
+  beforeUrl: /project-common/

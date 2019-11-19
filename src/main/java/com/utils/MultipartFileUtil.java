@@ -20,7 +20,6 @@ public class MultipartFileUtil {
 //    public static String uploadFilePath = "/root/uploadFile/project-common";
 
 
-
     /**
      * 获取上传文件的真实名，去后缀
      */

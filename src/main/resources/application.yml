@@ -7,11 +7,11 @@ spring:
   #      enabled: true  #设置开启热部署
   #      additional-paths: src/main/java  #重启目录
 
-  datasource:
-    url: jdbc:mysql://120.24.186.190:3306/base_common?serverTimezone=Hongkong&useSSL=false
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: abcABC123...
+  # Spring 配置环境
+  profiles:
+    active: local
+    #active: aliyun
+
 
   #thymeleaf 配置
   thymeleaf:
@@ -29,14 +29,16 @@ spring:
       # 上传文件总的最大值
       max-request-size: 1000MB
 
+  # 返回 json 配置
+  jackson:
+   date-format: yyyy-MM-dd HH:mm:ss
+   time-zone: GMT+8
 
-
-
-
+# mybatis xml文件 扫描并装配的路径
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
-
+# 分页插件 配置
 pagehelper:
   #下面两行正常写法
   helper-dialect: mysql
@@ -46,9 +48,4 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-# 配置文件上传的存储路径，以及图片预览前置路径
-uploadFile:
-  path: D:\E\ideaProject\project-common\src\main\resources\static\
-  beforeUrl: http://localhost:12345/
-#  path: /root/uploadFile/project-common/
-#  beforeUrl: http://localhost:80/project-common/
+
