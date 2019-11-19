@@ -16,9 +16,15 @@ public class ServerConfig  implements ApplicationListener<WebServerInitializedEv
     @Value("${uploadFile.beforeUrl}")
     String beforeUrl;
     @Value("${uploadFile.ip}")
-    String ip;
+    String uploadFileIp;
     @Value("${uploadFile.port}")
-    String port;
+    String uploadFilePort;
+
+
+    public int getServerPort() {
+
+        return this.serverPort;
+    }
 
 
     public String getIp() {
@@ -50,14 +56,14 @@ public class ServerConfig  implements ApplicationListener<WebServerInitializedEv
             e.printStackTrace();
         }
 
-        if(StringUtils.isEmpty(port)){
-            port = this.serverPort+"";
+        if(StringUtils.isEmpty(uploadFilePort)){
+            uploadFilePort = this.serverPort+"";
         }
-        if(StringUtils.isEmpty(ip)){
-            ip = address.getHostAddress();
+        if(StringUtils.isEmpty(uploadFileIp)){
+            uploadFileIp = address.getHostAddress();
         }
 
-        return "http://"+ ip +":"+ port+beforeUrl;
+        return "http://"+ uploadFileIp +":"+ uploadFilePort + beforeUrl;
     }
 
     @Override

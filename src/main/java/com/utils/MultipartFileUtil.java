@@ -16,7 +16,8 @@ public class MultipartFileUtil {
     /**
      * 文件在服务器中存储的目录
      */
-    public static String uploadFilePath = "D:\\E\\ideaProject\\project-common\\src\\main\\resources\\static";
+    public static String uploadFilePath = "";
+//    public static String uploadFilePath = "D:\\E\\ideaProject\\project-common\\src\\main\\resources\\static";
 //    public static String uploadFilePath = "/root/uploadFile/project-common";
 
 
@@ -55,7 +56,7 @@ public class MultipartFileUtil {
      * 将文件存入磁盘中,路径在本项项目WebContent目录下,指定存储文件名
      */
     public static String fileSave(MultipartFile file, String path,String memoryName){
-        String realPath = uploadFilePath + "\\" + path;
+        String realPath = uploadFilePath + path;
         File targetDir = new File(realPath);
         if(!targetDir.exists()){
             targetDir.mkdirs();
@@ -90,7 +91,7 @@ public class MultipartFileUtil {
     public static String downloadFile(String path,String fileName,HttpServletRequest request,
                                HttpServletResponse response) throws UnsupportedEncodingException {
         // 文件路径
-        String realPath = uploadFilePath + "\\" +path;
+        String realPath = uploadFilePath +path;
         File file = new File(realPath);
 
         // 如果文件存在，则进行下载
@@ -150,7 +151,7 @@ public class MultipartFileUtil {
      * @param path 相对路径
      */
     public static void deleteFile(String path){
-        String absolutePath = uploadFilePath + "\\" + path;
+        String absolutePath = uploadFilePath + path;
         File file = new File(absolutePath);
         file.delete();
     }

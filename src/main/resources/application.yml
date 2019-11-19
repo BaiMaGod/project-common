@@ -10,7 +10,7 @@ spring:
   # Spring 配置环境
   profiles:
     active: local
-    #active: aliyun
+#    active: aliyun
 
 
   #thymeleaf 配置
