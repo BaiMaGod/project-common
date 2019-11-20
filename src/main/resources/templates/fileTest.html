@@ -72,7 +72,9 @@
                 // 文件
                 var multipartFiles = $("[name='multipartFiles']");
                 for (var i = 0; i < multipartFiles.length; i++) {
-                    formData.append("multipartFiles", multipartFiles[i].files[0]);
+                    if(multipartFiles[i].files[0] != null){
+                        formData.append("multipartFiles", multipartFiles[i].files[0]);
+                    }
                 }
 
                 // console.log(formData);

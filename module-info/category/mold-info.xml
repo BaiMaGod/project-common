@@ -85,4 +85,25 @@
         </method>-->
     </methods>
 
+	<sql>
+		SET NAMES utf8mb4;
+		SET FOREIGN_KEY_CHECKS = 0;
+
+		-- ----------------------------
+		-- Table structure for category
+		-- ----------------------------
+		DROP TABLE IF EXISTS `category`;
+		CREATE TABLE `category`  (
+		`categoryId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'categoryId，自增',
+		`parentId` int(11) NULL DEFAULT NULL COMMENT '父类型id',
+		`categoryName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型名',
+		`introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型说明',
+		`type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型，user_emotionalState=用户信息-感情状况',
+		`createTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+		`updateTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+		PRIMARY KEY (`categoryId`) USING BTREE
+		) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+		SET FOREIGN_KEY_CHECKS = 1;
+	</sql>
 </config>

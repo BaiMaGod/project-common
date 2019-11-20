@@ -74,8 +74,8 @@ public class MultipartFileUtil {
         memoryName = memoryName + "."+fileSuffix;
 
 //        生成文件src路径
-        String src = path +"\\"+ memoryName;
-        File targetFile = new File(realPath+"\\"+memoryName);
+        String src = path +"/"+ memoryName;
+        File targetFile = new File(realPath+"/"+memoryName);
 //         保存到磁盘
         try {
             file.transferTo(targetFile);

@@ -4,7 +4,7 @@
     <info>
     	<name>file</name>
     	<nameHan>文件资源</nameHan>
-    	<description>提供文件等资源的上传、下载、列表查询功能</description>
+    	<description>提供文件等资源的上传、图片预览、下载、列表查询功能</description>
     	<tag>基础功能</tag>
 
     	<lowPrice>30</lowPrice>
@@ -70,4 +70,28 @@
         </method>
     </methods>
 
+    <sql>
+        SET NAMES utf8mb4;
+        SET FOREIGN_KEY_CHECKS = 0;
+
+        -- ----------------------------
+        -- Table structure for file
+        -- ----------------------------
+        DROP TABLE IF EXISTS `file`;
+        CREATE TABLE `file`  (
+        `fileId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'fileId，自增',
+        `userId` int(11) NULL DEFAULT NULL COMMENT '上传者用户id',
+        `fileFullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件在服务器中的全称，包含文件名和后缀',
+        `fileShortName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件在服务器中的简称，仅包含文件名，不包含后缀',
+        `fileRealName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件上传时的真实全称，包含文件名和后缀',
+        `fileSuffix` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件后缀',
+        `fileUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件在服务器中的相对路径url',
+        `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型，headImg=头像文件，',
+        `createTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+        `updateTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+        PRIMARY KEY (`fileId`) USING BTREE
+        ) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+        SET FOREIGN_KEY_CHECKS = 1;
+    </sql>
 </config>

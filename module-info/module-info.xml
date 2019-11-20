@@ -24,14 +24,6 @@
     </molds>
 
     <sql>
-        <base>
 
-        </base>
-        <login>
-
-        </login>
-        <register>
-
-        </register>
     </sql>
 </config>
