@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.mapper.common.FileMapper;
 import com.model.common.File;
 import com.model.common.FileExample;
+import com.model.common.FileSimpleVo;
 import com.result.Page;
 import com.result.Result;
 import com.result.ResultStatus;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -76,7 +78,9 @@ public class FileServiceImpl implements FileService{
             return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_File_Add);
         }
 
-        int num = 0;
+        // 将上传的文件url返回给前端
+        List<FileSimpleVo> urls = new ArrayList<>();
+
         for (MultipartFile multipartFile : form.getMultipartFiles()) {
             File file = new File();
             // 设置文件上传时的真实名
@@ -94,10 +98,12 @@ public class FileServiceImpl implements FileService{
 
             file.setFileUrl(MultipartFileUtil.fileSave(multipartFile,form.getType(),longId));
 
-            num += fileMapper.insertSelective(file);
+            fileMapper.insertSelective(file);
+
+            urls.add( new FileSimpleVo(file.getFileFullName(),serverConfig.getUploadFileUrl() + file.getFileUrl()) );
         }
 
-        return Result.success(num);
+        return Result.success(urls);
     }
 
     @Override
