@@ -35,8 +35,6 @@ public class FileController {
 
         if(loginUser != null && loginUser.getUserId()!=null){
             form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
         }*/
 
         return fileService.add(form);
@@ -45,19 +43,7 @@ public class FileController {
     @ApiOperation(value = "修改文件信息",notes = "根据id，修改，非管理员只能修改自己上传的文件的部分信息")
     @PutMapping("/update")
     public Result update(FileForm.updateForm form, HttpSession session){
-       /* UserExt loginUser = (UserExt) session.getAttribute("loginUser");
-
-        if(loginUser != null && loginUser.getUserId()!=null){
-            form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
-        }
-        if(loginUser != null && (loginUser.getRole()!=null && loginUser.getRole().getLevel()>=100) ){
-            form.setAdmin(true);
-        }
-
-        return Result.fail(0, ResultStatus.ERROR_No_Login);
-*/
+        form.setUserInfo(session);
 
         return fileService.update(form);
     }
@@ -72,19 +58,8 @@ public class FileController {
     @ApiOperation(value = "删除文件",notes = "根据分类id，删除文件，可批量删除，多个id逗号分隔，非管理员只能删除自己上传的文件")
     @DeleteMapping("/delete")
     public Result delete(FileForm.deleteForm form, HttpSession session){
-       /* UserExt loginUser = (UserExt) session.getAttribute("loginUser");
+        form.setUserInfo(session);
 
-        if(loginUser != null && loginUser.getUserId()!=null){
-            form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
-        }
-        if(loginUser != null && (loginUser.getRole()!=null && loginUser.getRole().getLevel()>=100) ){
-            form.setAdmin(true);
-        }
-
-        return Result.fail(0, ResultStatus.ERROR_No_Login);
-*/
         return fileService.delete(form);
     }
 }

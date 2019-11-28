@@ -1,6 +1,7 @@
 package com.form.common;
 
 import com.form.PageForm;
+import com.form.UserInfoForm;
 import com.utils.CheckUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -76,17 +77,12 @@ public class CommentForm {
     }
 
     @Data
-    public static class updateForm {
+    public static class updateForm  extends UserInfoForm {
         @ApiModelProperty(value = "评论id")
         private Integer commentId;
         @ApiModelProperty(value = "内容")
         private String context;
 
-
-        @ApiModelProperty(value = "用户id",hidden = true)
-        private Integer userId;
-        @ApiModelProperty(value = "是否是管理员",hidden = true)
-        private boolean admin;
 
 
         public Map<String,String> getErrorInfo(){
@@ -101,14 +97,10 @@ public class CommentForm {
     }
 
     @Data
-    public static class deleteForm {
+    public static class deleteForm extends UserInfoForm{
         @ApiModelProperty(value = "id,多个id用逗号分隔",required = true)
         private List<Integer> ids;
 
 
-        @ApiModelProperty(value = "用户id",hidden = true)
-        private Integer userId;
-        @ApiModelProperty(value = "是否是管理员",hidden = true)
-        private boolean admin;
     }
 }

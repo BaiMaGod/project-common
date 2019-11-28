@@ -31,8 +31,6 @@ public class CommentController {
 
         if(loginUser != null && loginUser.getUserId()!=null){
             form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
         }*/
 
         return commentService.add(form);
@@ -41,16 +39,7 @@ public class CommentController {
     @ApiOperation(value = "修改",notes = "根据id修改,需登录，非管理员只能删除自己的")
     @PutMapping("/update")
     public Result update(CommentForm.updateForm form, HttpSession session){
-       /* UserExt loginUser = (UserExt) session.getAttribute("loginUser");
-
-        if(loginUser != null && loginUser.getUserId()!=null){
-            form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
-        }
-        if(loginUser != null && (loginUser.getRole()!=null && loginUser.getRole().getLevel()>=100) ){
-            form.setAdmin(true);
-        }*/
+        form.setUserInfo(session);
 
         return commentService.update(form);
     }
@@ -58,16 +47,7 @@ public class CommentController {
     @ApiOperation(value = "删除",notes = "根据分类id，可批量删除，多个id逗号分隔，非管理员只能删除自己的")
     @DeleteMapping("/delete")
     public Result delete(CommentForm.deleteForm form, HttpSession session){
-       /* UserExt loginUser = (UserExt) session.getAttribute("loginUser");
-
-        if(loginUser != null && loginUser.getUserId()!=null){
-            form.setUserId(loginUser.getUserId());
-        }else {
-            return Result.fail(0, ResultStatus.ERROR_No_Login);
-        }
-        if(loginUser != null && (loginUser.getRole()!=null && loginUser.getRole().getLevel()>=100) ){
-            form.setAdmin(true);
-        }*/
+        form.setUserInfo(session);
 
         return commentService.delete(form);
     }

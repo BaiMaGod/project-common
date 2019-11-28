@@ -1,6 +1,7 @@
 package com.form.common;
 
 import com.form.PageForm;
+import com.form.UserInfoForm;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.util.StringUtils;
@@ -56,16 +57,12 @@ public class FileForm {
     }
 
     @Data
-    public static class updateForm {
+    public static class updateForm extends UserInfoForm {
         @ApiModelProperty(value = "文件id",required = true)
         private Integer fileId;
         @ApiModelProperty(value = "类型")
         private String type;
 
-        @ApiModelProperty(value = "用户id",hidden = true)
-        private Integer userId;
-        @ApiModelProperty(value = "是否是管理员",hidden = true)
-        private boolean admin;
 
         public Map<String,String> getErrorInfo(){
             Map<String,String> errorInfos = new HashMap<>();
@@ -79,14 +76,10 @@ public class FileForm {
     }
 
     @Data
-    public class deleteForm {
+    public class deleteForm extends UserInfoForm{
         @ApiModelProperty(value = "文件id,多个id用逗号分隔",required = true)
         private List<Integer> fileIds;
 
-        @ApiModelProperty(value = "用户id",hidden = true)
-        private Integer userId;
-        @ApiModelProperty(value = "是否是管理员",hidden = true)
-        private boolean admin;
     }
 
     @Data
