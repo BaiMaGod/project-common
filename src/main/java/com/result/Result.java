@@ -9,8 +9,9 @@ import lombok.Data;
 @Data
 public class Result<T> {
     private int code;   // 状态码
-    private long count = 1l; // 内容条数
+    private long count = 1; // 内容条数
     private String msg; // 提示信息
+    private Page page; // 提示信息
     private T data;     // 数据内容
 
 
@@ -27,10 +28,23 @@ public class Result<T> {
         setStatus(ResultStatus.SUCCESS);
         this.data = t;
     }
-    public Result(long count,T t) {
+    public Result(int count,T t) {
         setStatus(ResultStatus.SUCCESS);
         this.count = count;
         this.data = t;
+    }
+
+    private Result(T t, Page page) {
+        setStatus(ResultStatus.SUCCESS);
+        this.data = t;
+        this.page = page;
+    }
+
+    private Result(long count,T t, Page page) {
+        setStatus(ResultStatus.SUCCESS);
+        this.count = count;
+        this.data = t;
+        this.page = page;
     }
 
     public Result<T> setStatus(ResultStatus status) {
@@ -40,20 +54,8 @@ public class Result<T> {
         return this;
     }
 
-    private Result(T t, Page page) {
-        PageData resultData = new PageData(t);
-        resultData.setPage(page);
-        this.data = (T) resultData;
-    }
-
     public static <T>Result<T> success(T t) {
         Result result = new Result(t);
-        return result;
-    }
-
-    public static <T>Result<T> fail(T t, ResultStatus status) {
-        Result result = new Result(t);
-        result.setStatus(status);
         return result;
     }
 
@@ -62,6 +64,16 @@ public class Result<T> {
         return result;
     }
 
+    public static <T>Result<T> success(long count,T t, Page page) {
+        Result result = new Result(count,t, page);
+        return result;
+    }
+
+    public static <T>Result<T> fail(T t, ResultStatus status) {
+        Result result = new Result(t);
+        result.setStatus(status);
+        return result;
+    }
 
 
     public Result<T> setCode(int code) {
@@ -79,10 +91,14 @@ public class Result<T> {
         return this;
     }
 
+    public Result<T> setPage(Page page) {
+        this.page = page;
+        return this;
+    }
+
     public Result<T> setData(T data) {
         this.data = data;
 
         return this;
     }
-
 }

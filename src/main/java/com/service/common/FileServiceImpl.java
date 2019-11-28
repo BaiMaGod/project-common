@@ -3,8 +3,8 @@ package com.service.common;
 import com.config.ServerConfig;
 import com.form.common.FileForm;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mapper.common.FileMapper;
-import com.model.common.Comment;
 import com.model.common.File;
 import com.model.common.FileExample;
 import com.model.common.FileSimpleVo;
@@ -64,14 +64,14 @@ public class FileServiceImpl implements FileService{
         PageHelper.startPage(form.getPage(),form.getLimit());
         List<File> files = fileMapper.selectByExample(example);
 
-        Page page = (Page) ConvertUtil.convert(form,new Page());
-        page.setTotalRows(count);
+        PageInfo<File> pageInfo = new PageInfo<>(files);
+        Page page = form.pageHelperResult(pageInfo);
 
         for (File file : files) {
             file.setFileUrl(serverConfig.getUploadFileUrl() + file.getFileUrl());
         }
 
-        return Result.success(files,page).setCount(count);
+        return Result.success(page.getTotalRows(),files,page);
     }
 
     @Override

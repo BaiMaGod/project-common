@@ -48,15 +48,14 @@ public class CategoryServiceImpl implements CategoryService{
             example.setOrderByClause(form.getOrderByClause());
         }
 
-        int count = categoryMapper.countByExample(example);
         // 使用PageHelper插件分页
         PageHelper.startPage(form.getPage(),form.getLimit());
         List<Category> categories = categoryMapper.selectByExample(example);
 
-        Page page = (Page) ConvertUtil.convert(form,new Page());
-        page.setTotalRows(count);
+        PageInfo<Category> pageInfo = new PageInfo<>(categories);
+        Page page = form.pageHelperResult(pageInfo);
 
-        return Result.success(categories,page).setCount(count);
+        return Result.success(page.getTotalRows(),categories,page);
     }
 
     /**

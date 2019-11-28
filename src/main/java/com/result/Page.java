@@ -9,7 +9,7 @@ public class Page {
     //	每页条数
     private int limit;
     // 总条数
-    private int totalRows;
+    private long totalRows;
     // 总页数
     private int totalPages;
     // 起始条序号
@@ -39,8 +39,8 @@ public class Page {
     }
 
     public int getTotalPages() {
-        return this.totalRows/(this.limit+1)+1;
+        return (int) (this.totalRows/(this.limit+1)+1);
     }
-    
+
 
 }

@@ -81,15 +81,14 @@ public class CommentServiceImpl implements CommentService{
             example.setOrderByClause(form.getOrderByClause());
         }
 
-        int count = commentMapper.countByExample(example);
         // 使用PageHelper插件分页
         PageHelper.startPage(form.getPage(),form.getLimit());
         List<Comment> comments = commentMapper.selectByExample(example);
 
-        Page page = (Page) ConvertUtil.convert(form,new Page());
-        page.setTotalRows(count);
+        PageInfo<Comment> pageInfo = new PageInfo<>(comments);
+        Page page = form.pageHelperResult(pageInfo);
 
-        return Result.success(comments,page).setCount(count);
+        return Result.success(page.getTotalRows(),comments,page);
     }
 
     /**

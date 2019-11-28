@@ -1,5 +1,6 @@
 package com.form.common;
 
+import com.form.PageForm;
 import com.utils.CheckUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,18 +13,13 @@ import java.util.Map;
 public class CategoryForm {
 
     @Data
-    public static class listForm{
+    public static class listForm extends PageForm {
         @ApiModelProperty(value = "分类id")
         private Integer categoryId;
         @ApiModelProperty(value = "父类id")
         private Integer parentId;
         @ApiModelProperty(value = "分类类型")
         private String type;
-
-        @ApiModelProperty(value = "第几页")
-        private int page;
-        @ApiModelProperty(value = "每页条数")
-        private int limit;
 
         @ApiModelProperty(value = "排序规则")
         private String orderByClause;
