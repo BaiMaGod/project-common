@@ -44,6 +44,18 @@
             <onlineTime>2019-11-14</onlineTime>
         </method>
         <method>
+            <name>update</name>
+            <nameHan>修改文件信息</nameHan>
+            <description>修改文件信息，修改分类等</description>
+            <tag>基础</tag>
+
+            <lowPrice>20</lowPrice>
+            <lowHour>2</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-11-14</onlineTime>
+        </method>
+        <method>
             <name>download</name>
             <nameHan>文件下载</nameHan>
             <description>微信授权登录</description>
@@ -90,7 +102,7 @@
         `createTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
         `updateTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
         PRIMARY KEY (`fileId`) USING BTREE
-        ) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+        ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
         SET FOREIGN_KEY_CHECKS = 1;
     </sql>

@@ -1,5 +1,6 @@
 package com.form.common;
 
+import com.form.PageForm;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.util.StringUtils;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class FileForm {
 
     @Data
-    public static class listForm {
+    public static class listForm extends PageForm {
         @ApiModelProperty(value = "文件id")
         private Integer fileId;
         @ApiModelProperty(value = "用户id")
@@ -24,16 +25,15 @@ public class FileForm {
         @ApiModelProperty(value = "类型")
         private String type;
 
-        @ApiModelProperty(value = "第几页")
-        private int page;
-        @ApiModelProperty(value = "每页条数")
-        private int limit;
+        @ApiModelProperty(value = "排序规则")
+        private String orderByClause;
     }
 
     @Data
     public static class addForm {
-        @ApiModelProperty(value = "用户id")
+        @ApiModelProperty(value = "用户id",hidden = true)
         private Integer userId;
+
         @ApiModelProperty(value = "类型",required = true)
         private String type;
         @ApiModelProperty(value = "文件，可多个",required = true)
@@ -44,14 +44,34 @@ public class FileForm {
         public Map<String,String> getErrorInfo(){
             Map<String,String> errorInfos = new HashMap<>();
 
-            if(userId==null){
-                errorInfos.put("user","登录用户才能上传文件");
-            }
             if(StringUtils.isEmpty(type)){
                 errorInfos.put("type","类型 不能为空");
             }
             if(multipartFiles==null || multipartFiles.isEmpty()){
-                errorInfos.put("introduce","文件 不能为空");
+                errorInfos.put("multipartFiles","文件 不能为空");
+            }
+
+            return errorInfos;
+        }
+    }
+
+    @Data
+    public static class updateForm {
+        @ApiModelProperty(value = "文件id",required = true)
+        private Integer fileId;
+        @ApiModelProperty(value = "类型")
+        private String type;
+
+        @ApiModelProperty(value = "用户id",hidden = true)
+        private Integer userId;
+        @ApiModelProperty(value = "是否是管理员",hidden = true)
+        private boolean admin;
+
+        public Map<String,String> getErrorInfo(){
+            Map<String,String> errorInfos = new HashMap<>();
+
+            if(fileId==null){
+                errorInfos.put("fileId","文件id不能为空");
             }
 
             return errorInfos;
@@ -62,6 +82,11 @@ public class FileForm {
     public class deleteForm {
         @ApiModelProperty(value = "文件id,多个id用逗号分隔",required = true)
         private List<Integer> fileIds;
+
+        @ApiModelProperty(value = "用户id",hidden = true)
+        private Integer userId;
+        @ApiModelProperty(value = "是否是管理员",hidden = true)
+        private boolean admin;
     }
 
     @Data

@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService{
         CategoryExample example = new CategoryExample();
         CategoryExample.Criteria criteria = example.createCriteria();
 
-        if(form.getCategoryId()!=null){
+        if(form.getCategoryId()!=null) {
             criteria.andCategoryIdEqualTo(form.getCategoryId());
         }
         if(form.getParentId()!=null){
@@ -41,6 +41,11 @@ public class CategoryServiceImpl implements CategoryService{
         }
         if(!StringUtils.isEmpty(form.getType())){
             criteria.andTypeEqualTo(form.getType());
+        }
+
+        // 排序
+        if(!StringUtils.isEmpty(form.getOrderByClause())){
+            example.setOrderByClause(form.getOrderByClause());
         }
 
         int count = categoryMapper.countByExample(example);

@@ -1,0 +1,58 @@
+<generatorConfiguration>
+
+    <context templatesPath="D:\E\ideaProject\module-generator\src\main\resources\templates\">
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.model.common" targetProject="src/main/java">
+
+        </javaModelGenerator>
+
+        <!--生成映射xml文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mapper.common" targetProject="src/main/java">
+
+        </javaClientGenerator>
+
+
+        <!--生成 Result 类存放位置-->
+        <javaResultGenerator targetPackage="com.result" targetProject="src/main/java">
+
+        </javaResultGenerator>
+\
+        <!--生成 Form 类存放位置-->
+        <javaFormGenerator targetPackage="com.form.common" targetProject="src/main/java">
+
+        </javaFormGenerator>
+
+        <!--生成 Service 类存放位置-->
+        <javaServiceGenerator targetPackage="com.service.common" targetProject="src/main/java">
+
+        </javaServiceGenerator>
+
+        <!--生成 ServiceImpl 类存放位置-->
+        <javaServiceImplGenerator targetPackage="com.service.common" targetProject="src/main/java">
+
+        </javaServiceImplGenerator>
+
+        <!--生成 Controller 类存放位置-->
+        <javaControllerGenerator targetPackage="com.controller.common" targetProject="src/main/java">
+
+        </javaControllerGenerator>
+
+
+        <!--生成对应表及类名-->
+        <table tableName="comment" domainObjectName="Comment"
+               enableCountByExample="true"  enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->
+            <property name="useActualColumnNames" value="true"/>
+
+
+        </table>
+    </context>
+
+</generatorConfiguration>

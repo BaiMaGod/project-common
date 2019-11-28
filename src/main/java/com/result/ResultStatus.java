@@ -11,7 +11,12 @@ public enum ResultStatus {
     ERROR_Category_Update(102,"分类修改失败"),
     ERROR_File_Add(111,"文件添加失败"),
     ERROR_File_No_Exist(112,"文件不存在"),
-    ERROR_File_Download(113,"文件下载出错");
+    ERROR_File_Download(113,"文件下载出错"),
+    ERROR_File_Update(114,"文件修改失败"),
+    ERROR_Comment_Add(7099,"添加失败"),
+    ERROR_Comment_Update(7099,"修改失败"),
+    ERROR_Comment_Delete(7099,"删除失败"),
+    ERROR_Comment_No_Exist(7099,"不存在");
 
     private int code;
     private String msg;

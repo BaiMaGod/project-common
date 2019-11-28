@@ -102,7 +102,7 @@
 		`createTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
 		`updateTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
 		PRIMARY KEY (`categoryId`) USING BTREE
-		) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+		) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 		SET FOREIGN_KEY_CHECKS = 1;
 	</sql>

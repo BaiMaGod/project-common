@@ -14,4 +14,6 @@ public interface FileService {
     Result download(FileForm.downloadForm form, HttpServletRequest request, HttpServletResponse response);
 
     Result delete(FileForm.deleteForm form);
+
+    Result update(FileForm.updateForm form);
 }

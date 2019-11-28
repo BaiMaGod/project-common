@@ -48,23 +48,34 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="category" domainObjectName="Category"
+        <!--<table tableName="category" domainObjectName="Category"
                enableCountByExample="true"  enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
-            <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->
+            &lt;!&ndash;默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值&ndash;&gt;
             <property name="useActualColumnNames" value="true"/>
 
 
-        </table>
+        </table>-->
 
         <!--生成对应表及类名-->
-        <table tableName="file" domainObjectName="File"
+ <!--       <table tableName="file" domainObjectName="File"
+               enableCountByExample="true"  enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            &lt;!&ndash;默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值&ndash;&gt;
+            <property name="useActualColumnNames" value="true"/>
+
+
+        </table>-->
+
+        <!--生成对应表及类名-->
+        <table tableName="comment" domainObjectName="Comment"
                enableCountByExample="true"  enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->
             <property name="useActualColumnNames" value="true"/>
 
-
+            <!-- 将text类型当作VARCHAR处理 -->
+            <columnOverride column="context" jdbcType="VARCHAR" />
         </table>
 
     </context>

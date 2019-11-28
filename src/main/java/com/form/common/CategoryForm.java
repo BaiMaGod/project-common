@@ -24,6 +24,9 @@ public class CategoryForm {
         private int page;
         @ApiModelProperty(value = "每页条数")
         private int limit;
+
+        @ApiModelProperty(value = "排序规则")
+        private String orderByClause;
     }
 
     @Data

@@ -4,6 +4,7 @@ import com.config.ServerConfig;
 import com.form.common.FileForm;
 import com.github.pagehelper.PageHelper;
 import com.mapper.common.FileMapper;
+import com.model.common.Comment;
 import com.model.common.File;
 import com.model.common.FileExample;
 import com.model.common.FileSimpleVo;
@@ -22,9 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FileServiceImpl implements FileService{
@@ -53,6 +52,11 @@ public class FileServiceImpl implements FileService{
         }
         if(!StringUtils.isEmpty(form.getType())){
             criteria.andTypeEqualTo(form.getType());
+        }
+
+        // 排序
+        if(!StringUtils.isEmpty(form.getOrderByClause())){
+            example.setOrderByClause(form.getOrderByClause());
         }
 
         int count = fileMapper.countByExample(example);
@@ -107,6 +111,30 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
+    public Result update(FileForm.updateForm form) {
+        // 首先检查用户注册信息的合法性，如有不合法输入，返回错误信息
+        if(!form.getErrorInfo().isEmpty()){
+            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_File_Update);
+        }
+
+        File file = fileMapper.selectByPrimaryKey(form.getFileId());
+        if(!form.isAdmin() && form.getUserId()!=file.getUserId()){
+            return Result.fail("不能修改别人的文件", ResultStatus.ERROR_Comment_Update);
+        }
+
+
+        file = (File) ConvertUtil.convert(form, new File());
+        file.setUpdateTime(new Date());
+
+        int num = fileMapper.updateByPrimaryKeySelective(file);
+        if(num>0){
+            return Result.success(num);
+        }
+
+        return Result.fail(num, ResultStatus.ERROR_File_Update);
+    }
+
+    @Override
     public Result download(FileForm.downloadForm form, HttpServletRequest request, HttpServletResponse response) {
         File file = fileMapper.selectByPrimaryKey(form.getFileId());
 
@@ -132,19 +160,26 @@ public class FileServiceImpl implements FileService{
             return Result.success(0);
         }
         int count = 0;
-        for (Integer fileId : form.getFileIds()) {
+        File file;
+        Map<String,Object> errorInfos = new HashMap<>();
+        for (Integer id : form.getFileIds()) {
+            file = fileMapper.selectByPrimaryKey(id);
 
-            File file = fileMapper.selectByPrimaryKey(fileId);
-            // 先删除数据库数据
-            int num = fileMapper.deleteByPrimaryKey(fileId);
-            // 再删除磁盘文件
-            if(file!=null && num > 0){
-                MultipartFileUtil.deleteFile(file.getFileUrl());
+            if(!form.isAdmin() && form.getUserId() != file.getUserId()){
+                errorInfos.put(id+"","不能删除别人的评论");
+            }else{
+                // 先删除数据库数据
+                int num = fileMapper.deleteByPrimaryKey(id);
+                // 再删除磁盘文件
+                if(file!=null && num > 0){
+                    MultipartFileUtil.deleteFile(file.getFileUrl());
+                }
+
+                count += num;
             }
-
-            count += num;
         }
 
-        return Result.success(count);
+        errorInfos.put("delete",count);
+        return Result.success(errorInfos);
     }
 }
