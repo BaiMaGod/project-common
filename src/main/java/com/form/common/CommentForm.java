@@ -50,11 +50,11 @@ public class CommentForm {
         private Integer userId;
         @ApiModelProperty(value = "目标id")
         private Integer targetId;
-        @ApiModelProperty(value = "类型")
+        @ApiModelProperty(value = "类型",required = true)
         private String type;
         @ApiModelProperty(value = "分数")
         private Integer score;
-        @ApiModelProperty(value = "内容")
+        @ApiModelProperty(value = "内容",required = true)
         private String context;
 
 
@@ -62,9 +62,7 @@ public class CommentForm {
         public Map<String,String> getErrorInfo(){
             Map<String,String> errorInfos = new HashMap<>();
 
-            if(targetId==null){
-                errorInfos.put("targetId","目标id不能为空");
-            }
+
             if(type==null){
                 errorInfos.put("type","类型不能为空");
             }
@@ -78,9 +76,9 @@ public class CommentForm {
 
     @Data
     public static class updateForm  extends UserInfoForm {
-        @ApiModelProperty(value = "评论id")
+        @ApiModelProperty(value = "评论id",required = true)
         private Integer commentId;
-        @ApiModelProperty(value = "内容")
+        @ApiModelProperty(value = "内容",required = true)
         private String context;
 
 
