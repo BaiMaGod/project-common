@@ -85,7 +85,10 @@ public class FileServiceImpl implements FileService{
         // 将上传的文件url返回给前端
         List<FileSimpleVo> urls = new ArrayList<>();
 
-        for (MultipartFile multipartFile : form.getMultipartFiles()) {
+        MultipartFile multipartFile;
+        for (int i = 0; i < form.getMultipartFiles().size(); i++) {
+            multipartFile = form.getMultipartFiles().get(i);
+
             File file = new File();
             // 设置文件上传时的真实名
             file.setFileRealName(MultipartFileUtil.getFileRealName(multipartFile));
@@ -99,6 +102,9 @@ public class FileServiceImpl implements FileService{
             file.setUserId(form.getUserId());
             file.setType(form.getType());
             file.setCreateTime(new Date());
+            if(form.getFileDescribe() != null && form.getFileDescribe().size() > i){
+                file.setIntroduce(form.getFileDescribe().get(i));
+            }
 
             file.setFileUrl(MultipartFileUtil.fileSave(multipartFile,form.getType(),longId));
 

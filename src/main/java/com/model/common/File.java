@@ -1,6 +1,5 @@
 package com.model.common;
 
-
 import java.util.Date;
 
 public class File {
@@ -17,6 +16,8 @@ public class File {
     private String fileSuffix;
 
     private String fileUrl;
+
+    private String introduce;
 
     private String type;
 
@@ -78,6 +79,14 @@ public class File {
 
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl == null ? null : fileUrl.trim();
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce == null ? null : introduce.trim();
     }
 
     public String getType() {
