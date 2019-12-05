@@ -15,7 +15,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @ApiOperation(value = "根据id查询 分类项详情信息",notes = "根据id查询 分类项详情信息")
+    @ApiOperation(value = "根据id查询 分类项 详情信息",notes = "根据id查询 分类项 详情信息")
     @GetMapping("/findById")
     public Result findById(Integer id){
 

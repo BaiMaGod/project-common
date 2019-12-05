@@ -1,0 +1,23 @@
+<!-- 模块转换 配置信息 -->
+<config>
+    <module name="common">
+        <!-- 要转换的 功能 常规只能复制controller、form、mapper、model、service、vo，resources/mapper包下的类-->
+        <molds>
+            <mold name="category">
+                <!-- 额外直接复制的文件-->
+<!--                <file path="result/ResultStatus.java"></file>-->
+            </mold>
+            <mold name="comment">
+
+            </mold>
+            <mold name="file">
+
+            </mold>
+        </molds>
+
+        <!-- 额外直接复制的文件 复制到模块基础文件夹base下-->
+        <copy>
+            <file path="result/ResultStatus.java"></file>
+        </copy>
+    </module>
+</config>

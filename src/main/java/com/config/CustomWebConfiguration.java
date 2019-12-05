@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 自定义web配置
+ */
 @Component
 public class CustomWebConfiguration implements WebMvcConfigurer {
     @Value("${uploadFile.path}")

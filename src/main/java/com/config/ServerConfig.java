@@ -8,7 +8,10 @@ import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
- 
+
+/**
+ * 服务器配置信息
+ */
 @Component
 public class ServerConfig  implements ApplicationListener<WebServerInitializedEvent> {
 
