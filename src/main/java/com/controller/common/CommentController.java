@@ -17,6 +17,13 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @ApiOperation(value = "根据id查询 详情信息",notes = "根据id查询 详情信息")
+    @GetMapping("/findById")
+    public Result findById(Integer id){
+
+        return commentService.findById(id);
+    }
+
     @ApiOperation(value = "查询列表",notes = "查询满足条件的列表")
     @GetMapping("/list")
     public Result list(CommentForm.listForm form){

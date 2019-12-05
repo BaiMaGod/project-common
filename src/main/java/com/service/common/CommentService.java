@@ -4,6 +4,8 @@ import com.form.common.CommentForm;
 import com.result.Result;
 
 public interface CommentService {
+    Result findById(Integer id);
+
     Result list(CommentForm.listForm form);
 
     Result add(CommentForm.addForm form);

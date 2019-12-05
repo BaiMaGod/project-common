@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.mapper.common.FileMapper;
 import com.model.common.File;
 import com.model.common.FileExample;
-import com.model.common.FileSimpleVo;
+import com.vo.common.FileSimpleVo;
 import com.result.Page;
 import com.result.Result;
 import com.result.ResultStatus;
@@ -26,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Service
+@Transactional
 public class FileServiceImpl implements FileService{
     @Autowired
     FileMapper fileMapper;
@@ -78,7 +79,7 @@ public class FileServiceImpl implements FileService{
     public Result add(FileForm.addForm form) {
         // 首先检查用户注册信息的合法性，如有不合法输入，返回错误信息
         if(!form.getErrorInfo().isEmpty()){
-            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_File_Add);
+            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_Parameter);
         }
 
         // 将上传的文件url返回给前端
@@ -119,12 +120,12 @@ public class FileServiceImpl implements FileService{
     public Result update(FileForm.updateForm form) {
         // 首先检查用户注册信息的合法性，如有不合法输入，返回错误信息
         if(!form.getErrorInfo().isEmpty()){
-            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_File_Update);
+            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_Parameter);
         }
 
         File file = fileMapper.selectByPrimaryKey(form.getFileId());
         if(!form.isAdmin() && form.getUserId()!=file.getUserId()){
-            return Result.fail("不能修改别人的文件", ResultStatus.ERROR_Comment_Update);
+            return Result.fail("不能修改别人的文件", ResultStatus.ERROR_Update);
         }
 
 
@@ -136,7 +137,7 @@ public class FileServiceImpl implements FileService{
             return Result.success(num);
         }
 
-        return Result.fail(num, ResultStatus.ERROR_File_Update);
+        return Result.fail(num, ResultStatus.ERROR_Update);
     }
 
     @Override
@@ -144,7 +145,7 @@ public class FileServiceImpl implements FileService{
         File file = fileMapper.selectByPrimaryKey(form.getFileId());
 
         if(file==null || StringUtils.isEmpty(file.getFileUrl())){
-            return Result.fail(0,ResultStatus.ERROR_File_No_Exist);
+            return Result.fail("文件不存在",ResultStatus.ERROR_No_Exist);
         }
 
 

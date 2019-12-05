@@ -4,6 +4,8 @@ import com.form.common.CategoryForm;
 import com.result.Result;
 
 public interface CategoryService {
+    Result findById(Integer id);
+
     Result list(CategoryForm.listForm form);
 
     Result add(CategoryForm.addForm form);

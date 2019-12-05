@@ -15,6 +15,13 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    @ApiOperation(value = "根据id查询 分类项详情信息",notes = "根据id查询 分类项详情信息")
+    @GetMapping("/findById")
+    public Result findById(Integer id){
+
+        return categoryService.findById(id);
+    }
+
     @ApiOperation(value = "查询分类列表",notes = "查询满足条件的分类项列表")
     @GetMapping("/list")
     public Result list(CategoryForm.listForm form){
