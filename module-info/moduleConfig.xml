@@ -4,20 +4,22 @@
         <!-- 要转换的 功能 常规只能复制controller、form、mapper、model、service、vo，resources/mapper包下的类-->
         <molds>
             <mold name="category">
-                <!-- 额外直接复制的文件-->
-<!--                <file path="result/ResultStatus.java"></file>-->
+
             </mold>
             <mold name="comment">
 
             </mold>
             <mold name="file">
-
+                <!-- 额外直接复制的文件-->
+                <file path="config/CustomWebConfiguration.java"></file>
+                <file path="config/ServerConfig.java"></file>
+                <file path="utils/MultipartFileUtil.java"></file>
             </mold>
         </molds>
 
         <!-- 额外直接复制的文件 复制到模块基础文件夹base下-->
         <copy>
-            <file path="result/ResultStatus.java"></file>
+<!--            <file path="result/ResultStatus.java"></file>-->
         </copy>
     </module>
 </config>
