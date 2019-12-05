@@ -59,7 +59,6 @@ public class FileServiceImpl implements FileService{
             example.setOrderByClause(form.getOrderByClause());
         }
 
-        int count = fileMapper.countByExample(example);
         // 使用PageHelper插件分页
         PageHelper.startPage(form.getPage(),form.getLimit());
         List<File> files = fileMapper.selectByExample(example);
@@ -71,7 +70,7 @@ public class FileServiceImpl implements FileService{
             file.setFileUrl(serverConfig.getUploadFileUrl() + file.getFileUrl());
         }
 
-        return Result.success(page.getTotalRows(),files,page);
+        return Result.success(files,page);
     }
 
     @Override

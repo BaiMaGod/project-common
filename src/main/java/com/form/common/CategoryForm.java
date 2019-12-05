@@ -21,8 +21,6 @@ public class CategoryForm {
         @ApiModelProperty(value = "分类类型")
         private String type;
 
-        @ApiModelProperty(value = "排序规则")
-        private String orderByClause;
     }
 
     @Data

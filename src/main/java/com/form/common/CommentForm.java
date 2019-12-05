@@ -5,6 +5,7 @@ import com.form.UserInfoForm;
 import com.utils.CheckUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -31,17 +32,19 @@ public class CommentForm {
         @ApiModelProperty(value = "内容")
         private String context;
 
-        @ApiModelProperty(value = "起始-创建时间")
+        @ApiModelProperty(value = "起始-创建时间，yyyy-MM-dd")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date startCreateTime;
-        @ApiModelProperty(value = "结束-创建时间")
+        @ApiModelProperty(value = "结束-创建时间，yyyy-MM-dd")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date endCreateTime;
-        @ApiModelProperty(value = "起始-修改时间")
+        @ApiModelProperty(value = "起始-修改时间，yyyy-MM-dd")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date startUpdateTime;
-        @ApiModelProperty(value = "结束-修改时间")
+        @ApiModelProperty(value = "结束-修改时间，yyyy-MM-dd")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date endUpdateTime;
 
-        @ApiModelProperty(value = "排序规则")
-        private String orderByClause;
     }
 
     @Data

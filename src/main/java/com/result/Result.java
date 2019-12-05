@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Result<T> {
     private int code;   // 状态码
-    private long count = 1; // 内容条数
+    private long count; // 内容条数
     private String msg; // 提示信息
     private Page page; // 提示信息
     private T data;     // 数据内容
@@ -23,12 +23,17 @@ public class Result<T> {
         this.setStatus(status);
     }
 
+    public Result(int code,String msg){
+        this.code = code;
+        this.msg = msg;
+    }
+
 
     public Result(T t) {
         setStatus(ResultStatus.SUCCESS);
         this.data = t;
     }
-    public Result(int count,T t) {
+    public Result(T t,int count) {
         setStatus(ResultStatus.SUCCESS);
         this.count = count;
         this.data = t;
@@ -38,14 +43,9 @@ public class Result<T> {
         setStatus(ResultStatus.SUCCESS);
         this.data = t;
         this.page = page;
+        this.count = page.getTotalRows();
     }
 
-    private Result(long count,T t, Page page) {
-        setStatus(ResultStatus.SUCCESS);
-        this.count = count;
-        this.data = t;
-        this.page = page;
-    }
 
     public Result<T> setStatus(ResultStatus status) {
         this.code = status.getCode();
@@ -59,13 +59,24 @@ public class Result<T> {
         return result;
     }
 
+    public static <T>Result<T> success(T t,int count) {
+        Result result = new Result(t,count);
+        return result;
+    }
+
     public static <T>Result<T> success(T t, Page page) {
         Result result = new Result(t, page);
         return result;
     }
 
-    public static <T>Result<T> success(long count,T t, Page page) {
-        Result result = new Result(count,t, page);
+
+    public static <T>Result<T> fail(ResultStatus status) {
+        Result result = new Result(status);
+        return result;
+    }
+
+    public static <T>Result<T> fail(int code,String msg) {
+        Result result = new Result(code,msg);
         return result;
     }
 
@@ -74,6 +85,8 @@ public class Result<T> {
         result.setStatus(status);
         return result;
     }
+
+
 
 
     public Result<T> setCode(int code) {

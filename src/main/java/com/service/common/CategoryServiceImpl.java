@@ -55,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService{
         PageInfo<Category> pageInfo = new PageInfo<>(categories);
         Page page = form.pageHelperResult(pageInfo);
 
-        return Result.success(page.getTotalRows(),categories,page);
+        return Result.success(categories,page);
     }
 
     /**

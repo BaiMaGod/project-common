@@ -1,0 +1,78 @@
+<!-- 功能全局配置信息 -->
+<config>
+    <!-- 功能基础信息 -->
+    <info>
+    	<name>browse</name>
+    	<nameHan>浏览记录查询及统计</nameHan>
+    	<description>提供对浏览记录的查询及统计功能</description>
+    	<tag>一般功能</tag>
+
+    	<lowPrice>30</lowPrice>
+        <highPrice>170</highPrice>
+        
+    	<lowHour>3</lowHour>
+        <highHour>17</highHour>
+
+    	<author>yc</author>
+        <onlineTime>2019-12-04</onlineTime>
+    </info>
+
+    <!-- 功能实现方式 -->
+    <methods>
+        <method>
+            <name>list</name>
+            <nameHan>查询浏览记录列表</nameHan>
+            <description>查询满足条件的浏览记录列表，分页查询</description>
+            <tag>中级实现</tag>
+
+            <lowPrice>40</lowPrice>
+            <lowHour>4</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-12-04</onlineTime>
+        </method>
+        <method>            
+            <name>add</name>
+            <nameHan>新增浏览记录</nameHan>
+            <description>新增浏览记录</description>
+            <tag>基础实现</tag>
+
+            <lowPrice>20</lowPrice>
+            <lowHour>2</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-12-04</onlineTime>
+        </method>
+        <method>
+            <name>delete</name>
+            <nameHan>删除浏览记录</nameHan>
+            <description>删除浏览记录，可批量删除</description>
+            <tag>基础实现</tag>
+
+            <lowPrice>20</lowPrice>
+            <lowHour>2</lowHour>
+
+            <author>yc</author>
+            <onlineTime>2019-12-04</onlineTime>
+        </method>
+    </methods>
+
+    <sql>
+        SET NAMES utf8mb4;
+        SET FOREIGN_KEY_CHECKS = 0;
+
+        -- ----------------------------
+        -- Table structure for browse
+        -- ----------------------------
+        DROP TABLE IF EXISTS `browse`;
+        CREATE TABLE `browse`  (
+        `browseId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'watchId，自增',
+        `userId` int(11) NULL DEFAULT NULL COMMENT '观看者用户id，为空则为游客',
+        `targetId` int(11) NULL DEFAULT NULL COMMENT '观看目标的id',
+        `browseTime` datetime(0) NULL DEFAULT NULL COMMENT '观看时间',
+        PRIMARY KEY (`browseId`) USING BTREE
+        ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '观看记录表' ROW_FORMAT = Dynamic;
+
+        SET FOREIGN_KEY_CHECKS = 1;
+    </sql>
+</config>

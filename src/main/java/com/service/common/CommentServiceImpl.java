@@ -88,7 +88,7 @@ public class CommentServiceImpl implements CommentService{
         PageInfo<Comment> pageInfo = new PageInfo<>(comments);
         Page page = form.pageHelperResult(pageInfo);
 
-        return Result.success(page.getTotalRows(),comments,page);
+        return Result.success(comments,page);
     }
 
     /**
