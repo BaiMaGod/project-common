@@ -81,7 +81,7 @@
 
 
         <!--生成对应表及类名-->
-        <table tableName="browse" domainObjectName="Browse"
+        <table tableName="file" domainObjectName="File"
                enableCountByExample="true"  enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <!--默认是FALSE的，表示针对字段的下划线转换为驼峰写法，而为TRUE，表示原样输出数据库字段中的值-->

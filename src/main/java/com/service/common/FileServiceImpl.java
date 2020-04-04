@@ -39,7 +39,7 @@ public class FileServiceImpl implements FileService{
         FileExample example = new FileExample();
         FileExample.Criteria criteria = example.createCriteria();
 
-        if(form.getFileId()!=null){
+        if(!StringUtils.isEmpty(form.getFileId())){
             criteria.andFileIdEqualTo(form.getFileId());
         }
         if(form.getUserId()!=null){
@@ -74,12 +74,14 @@ public class FileServiceImpl implements FileService{
         return Result.success(files,page);
     }
 
+
     @Override
     @Transactional
     public Result add(FileForm.addForm form) {
-        // 首先检查用户注册信息的合法性，如有不合法输入，返回错误信息
-        if(!form.getErrorInfo().isEmpty()){
-            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_Parameter);
+        // 首先检查入参信息的合法性，如有非法输入，返回错误信息
+        Map<String, String> errorInfo = form.getErrorInfo();
+        if(!errorInfo.isEmpty()){
+            return Result.fail(errorInfo, ResultStatus.ERROR_Parameter);
         }
 
         // 将上传的文件url返回给前端
@@ -97,6 +99,7 @@ public class FileServiceImpl implements FileService{
             // 生成文件在服务器中的存储名，目的为防止重名
             String longId = CommonUtil.getLongId();
 
+            file.setFileId(longId);
             file.setFileShortName(longId);
             file.setFileFullName(longId+"."+file.getFileSuffix());
             file.setUserId(form.getUserId());
@@ -110,17 +113,76 @@ public class FileServiceImpl implements FileService{
 
             fileMapper.insertSelective(file);
 
-            urls.add( new FileSimpleVo(file.getFileFullName(),serverConfig.getUploadFileUrl() + file.getFileUrl()) );
+            urls.add( new FileSimpleVo(file.getFileId(),serverConfig.getUploadFileUrl() + file.getFileUrl()) );
         }
 
         return Result.success(urls);
     }
 
     @Override
+    public Result addOne(MultipartFile multipartFile) {
+        // 首先检查 入参 的合法性，如有不合法输入，返回错误信息
+        if(multipartFile==null){
+            return Result.fail("文件不能为空", ResultStatus.ERROR_Parameter);
+        }
+
+        File file = new File();
+        String fileId = CommonUtil.getLongId();
+        file.setFileId(fileId);
+
+        // 设置文件上传时的真实名
+        file.setFileRealName(MultipartFileUtil.getFileRealName(multipartFile));
+        // 设置文件后缀
+        file.setFileSuffix(MultipartFileUtil.getFileSuffix(multipartFile));
+
+        file.setCreateTime(new Date());
+
+        file.setFileUrl(MultipartFileUtil.fileSave(multipartFile,"uploadFile",fileId));
+
+        fileMapper.insertSelective(file);
+
+        return Result.success(new FileSimpleVo(file.getFileId(),serverConfig.getUploadFileUrl() + file.getFileUrl()));
+    }
+
+    @Override
+    public Result addOneType(FileForm.addOneTypeForm form) {
+        // 首先检查入参信息的合法性，如有非法输入，返回错误信息
+        Map<String, String> errorInfo = form.getErrorInfo();
+        if(!errorInfo.isEmpty()){
+            return Result.fail(errorInfo, ResultStatus.ERROR_Parameter);
+        }
+
+        MultipartFile multipartFile = form.getMultipartFile();
+
+        File file = new File();
+        // 设置文件上传时的真实名
+        file.setFileRealName(MultipartFileUtil.getFileRealName(multipartFile));
+        // 设置文件后缀
+        file.setFileSuffix(MultipartFileUtil.getFileSuffix(multipartFile));
+        // 生成文件在服务器中的存储名，目的为防止重名
+        String fileId = CommonUtil.getLongId();
+
+        file.setFileId(fileId);
+        file.setFileShortName(fileId);
+        file.setType(form.getType());
+        file.setCreateTime(new Date());
+
+        file.setFileUrl(MultipartFileUtil.fileSave(multipartFile,"uploadFile",fileId));
+
+        fileMapper.insertSelective(file);
+
+        FileSimpleVo fileSimpleVo = new FileSimpleVo(file.getFileId(), serverConfig.getUploadFileUrl() + file.getFileUrl());
+
+        return Result.success(fileSimpleVo);
+    }
+
+
+    @Override
     public Result update(FileForm.updateForm form) {
-        // 首先检查用户注册信息的合法性，如有不合法输入，返回错误信息
-        if(!form.getErrorInfo().isEmpty()){
-            return Result.fail(form.getErrorInfo(), ResultStatus.ERROR_Parameter);
+        // 首先检查入参信息的合法性，如有非法输入，返回错误信息
+        Map<String, String> errorInfo = form.getErrorInfo();
+        if(!errorInfo.isEmpty()){
+            return Result.fail(errorInfo, ResultStatus.ERROR_Parameter);
         }
 
         File file = fileMapper.selectByPrimaryKey(form.getFileId());
@@ -168,7 +230,7 @@ public class FileServiceImpl implements FileService{
         int count = 0;
         File file;
         Map<String,Object> errorInfos = new HashMap<>();
-        for (Integer id : form.getFileIds()) {
+        for (String id : form.getFileIds()) {
             file = fileMapper.selectByPrimaryKey(id);
 
             if(!form.isAdmin() && form.getUserId() != file.getUserId()){

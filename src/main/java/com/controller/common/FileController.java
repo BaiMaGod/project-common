@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class FileController {
         return fileService.list(form);
     }
 
-    @ApiOperation(value = "新增文件",notes = "新增文件,需登录")
+    @ApiOperation(value = "新增多个文件",notes = "新增文件")
     @PostMapping("/add")
     public Result add(FileForm.addForm form, HttpSession session){
        /* UserExt loginUser = (UserExt) session.getAttribute("loginUser");
@@ -39,6 +40,21 @@ public class FileController {
 
         return fileService.add(form);
     }
+
+    @ApiOperation(value = "新增单个文件",notes = "新增单个文件，上传成功返回可预览的url")
+    @PostMapping("/addOne")
+    public Result addOne(MultipartFile multipartFile){
+
+        return fileService.addOne(multipartFile);
+    }
+
+    @ApiOperation(value = "新增单个文件，有分类",notes = "新增单个文件，有分类")
+    @PostMapping("/addOneType")
+    public Result addOneType(FileForm.addOneTypeForm form){
+
+        return fileService.addOneType(form);
+    }
+
 
     @ApiOperation(value = "修改文件信息",notes = "根据id，修改，非管理员只能修改自己上传的文件的部分信息")
     @PutMapping("/update")

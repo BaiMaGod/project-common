@@ -115,52 +115,62 @@ public class FileExample {
             return (Criteria) this;
         }
 
-        public Criteria andFileIdEqualTo(Integer value) {
+        public Criteria andFileIdEqualTo(String value) {
             addCriterion("fileId =", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdNotEqualTo(Integer value) {
+        public Criteria andFileIdNotEqualTo(String value) {
             addCriterion("fileId <>", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdGreaterThan(Integer value) {
+        public Criteria andFileIdGreaterThan(String value) {
             addCriterion("fileId >", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFileIdGreaterThanOrEqualTo(String value) {
             addCriterion("fileId >=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdLessThan(Integer value) {
+        public Criteria andFileIdLessThan(String value) {
             addCriterion("fileId <", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdLessThanOrEqualTo(Integer value) {
+        public Criteria andFileIdLessThanOrEqualTo(String value) {
             addCriterion("fileId <=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdIn(List<Integer> values) {
+        public Criteria andFileIdLike(String value) {
+            addCriterion("fileId like", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdNotLike(String value) {
+            addCriterion("fileId not like", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdIn(List<String> values) {
             addCriterion("fileId in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdNotIn(List<Integer> values) {
+        public Criteria andFileIdNotIn(List<String> values) {
             addCriterion("fileId not in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdBetween(Integer value1, Integer value2) {
+        public Criteria andFileIdBetween(String value1, String value2) {
             addCriterion("fileId between", value1, value2, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andFileIdNotBetween(String value1, String value2) {
             addCriterion("fileId not between", value1, value2, "fileId");
             return (Criteria) this;
         }

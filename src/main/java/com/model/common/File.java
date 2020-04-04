@@ -3,7 +3,7 @@ package com.model.common;
 import java.util.Date;
 
 public class File {
-    private Integer fileId;
+    private String fileId;
 
     private Integer userId;
 
@@ -25,12 +25,12 @@ public class File {
 
     private Date updateTime;
 
-    public Integer getFileId() {
+    public String getFileId() {
         return fileId;
     }
 
-    public void setFileId(Integer fileId) {
-        this.fileId = fileId;
+    public void setFileId(String fileId) {
+        this.fileId = fileId == null ? null : fileId.trim();
     }
 
     public Integer getUserId() {

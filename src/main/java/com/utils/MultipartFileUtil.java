@@ -1,6 +1,7 @@
 package com.utils;
 
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class MultipartFileUtil {
      * 文件在服务器中存储的目录
      */
     public static String uploadFilePath = "";
+//    public static String uploadFilePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/WEB-INF/");
 //    public static String uploadFilePath = "D:\\E\\ideaProject\\project-common\\src\\main\\resources\\static";
 //    public static String uploadFilePath = "/root/uploadFile/project-common";
 
